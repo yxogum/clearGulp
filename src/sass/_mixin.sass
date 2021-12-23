@@ -1,0 +1,54 @@
+html, body
+    margin: 0 auto
+    padding: 0
+    font-size: 100%
+    background-color: #dfdfdf
+
+section
+    display: flex
+*
+    margin: 0
+    padding: 0
+
+@mixin text($color: #000000, $weight: inherit, $line: initial, $case: inherit, $spacing: auto)
+    color: $color
+    font-weight: $weight
+    line-height: $line
+    text-transform: $case
+    letter-spacing: $spacing
+
+@mixin size($width: auto, $height: auto,$min: auto )
+    width: $width
+    height: $height
+    min-height: $min
+
+@mixin flex($width,$height,$min)
+    display: flex
+    @include size($width,$height,$min)
+
+@mixin flex-center($width,$height,$min)
+    align-items: center
+    justify-content: center
+    @include flex($width,$height,$min)
+
+@mixin btn($width, $height,$min)
+    border: none
+    outline: none
+    cursor: pointer
+    box-sizing: border-box
+    @include flex-center($width,$height,$min )
+
+$maxWidth: 1920
+@mixin adaptiv-font($pcSize, $mobSize)
+    $addSize: $pcSize - $mobSize
+    $maxWidth: $maxWidth - 320
+    font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}))
+
+// $maxWidth: 1280
+// @mixin adaptiv-font($pcSize, $mobSize) 
+// 	$addSize: $pcSize - $mobSize
+// 	$addMobSize: $addSize + $addSize * 0.7
+// 	@media (max-width: 767px) 
+// 		font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}))	
+// 	@media (min-width: 767px) 
+// 		font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}))
